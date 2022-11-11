@@ -31,7 +31,7 @@ struct Message final{
         auto res = sender.Verify(GetHash(),signature);
         if(checkTime){
             const auto current = std::chrono::system_clock::to_time_t(std::chrono::system_clock::now());
-            return res && (current >= timestamp) && (current - timestamp <= 15*60);
+            return res && (std::abs(current - timestamp) <= 2*60);
         }
         return res;
     }
